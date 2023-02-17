@@ -1,7 +1,7 @@
 {{- if and .Values.paths .Values.tls }}
 {{- $root := .Values }}
 {{- range $path, $ingress := .Values.paths }}
-{{- if or (not $ingress.condition) (eq (tpl $ingress.condition $) "true") }}
+{{- if eq (tpl ($ingress.condition | default "true") $) "true" }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
